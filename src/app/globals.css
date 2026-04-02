@@ -1,26 +1,39 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Konfigurasi Palet Warna Light Mode (Terang & Bersih) */
+  --color-background: #ffffff; /* Latar belakang putih bersih */
+  --color-foreground: #0f172a; /* Teks utama (Slate-900) agar tidak terlalu hitam pekat */
+  
+  /* Primary: Biru Cerah (Membangun kepercayaan) */
+  --color-primary: #2563eb;    
+  --color-primary-hover: #1d4ed8; 
+  
+  /* Secondary: Abu-abu kebiruan lembut untuk kartu dan batas */
+  --color-surface: #f8fafc;    /* Slate-50 */
+  --color-surface-border: #e2e8f0; /* Slate-200 */
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base Styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  @apply antialiased selection:bg-primary/20 selection:text-foreground;
+}
+
+/* Custom Scrollbar - Disesuaikan untuk Light Mode */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
 }
