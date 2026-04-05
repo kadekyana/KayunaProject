@@ -1,4 +1,3 @@
-// src/components/sections/Portfolio.tsx
 import { supabase } from "@/lib/supabase";
 import Link from 'next/link';
 
@@ -40,17 +39,25 @@ export default async function Portfolio() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {portfolios?.map((item) => (
-            // PERUBAHAN DI SINI: Link adalah pembungkus luar, tanpa div double
             <Link 
               href={`/portofolio/${item.id}`} 
               key={item.id}
-              className="group flex flex-col rounded-3xl border border-surface-border bg-surface overflow-hidden transition-all hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-surface-border/80"
+              className="group flex flex-col rounded-3xl border border-surface-border bg-surface overflow-hidden transition-all hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10 hover:border-primary/30"
             >
-              <div className={`h-56 w-full bg-gradient-to-br ${item.gradient} flex items-center justify-center border-b border-surface-border`}>
-                 <span className="text-foreground/30 font-medium">Proyek: {item.title}</span>
+              <div className={`h-56 w-full bg-gradient-to-br ${item.gradient || 'from-surface-border to-background'} flex items-center justify-center border-b border-surface-border overflow-hidden relative`}>
+                 {item.images && item.images.length > 0 ? (
+                    
+                    <img 
+                      src={item.images[0]} 
+                      alt={item.title} 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                 ) : (
+                    <span className="text-foreground/30 font-medium z-10 relative">Proyek: {item.title}</span>
+                 )}
               </div>
               
-              <div className="p-8 flex-1 flex flex-col">
+              <div className="p-8 flex-1 flex flex-col bg-white">
                 <span className="text-xs font-bold text-primary mb-2 tracking-wider uppercase">
                   {item.category}
                 </span>
@@ -62,10 +69,10 @@ export default async function Portfolio() {
                 </p>
                 
                 <div className="flex flex-wrap gap-2 mt-auto">
-                  {item.tags.map((tag: string) => (
+                  {item.tags?.map((tag: string) => (
                     <span 
                       key={tag} 
-                      className="px-2.5 py-1 rounded-md bg-background border border-surface-border text-xs font-medium text-foreground/80"
+                      className="px-2.5 py-1 rounded-md bg-surface border border-surface-border text-xs font-medium text-foreground/70"
                     >
                       {tag}
                     </span>
