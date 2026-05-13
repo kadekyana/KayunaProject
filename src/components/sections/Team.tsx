@@ -14,7 +14,7 @@ const team = [
     gradient: "from-blue-500 to-cyan-400",
     gradientRaw: { from: "#3b82f6", to: "#22d3ee" },
     skills: ["Flutter", "Dart", "Firebase", "REST API"],
-    socialWa: "https://wa.me/+6281234567890",
+    socialWa: "https://wa.me/+6281234567890", 
     github: "https://github.com/",
     linkedin: "https://linkedin.com/in/",
   },
